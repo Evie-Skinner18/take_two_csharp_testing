@@ -23,6 +23,7 @@ namespace csharp_ui_take_two
 
             // Launch browser
             IWebDriver driver = new ChromeDriver(service);
+
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMinutes(1);
         
 
@@ -36,14 +37,14 @@ namespace csharp_ui_take_two
         
             // Csharp needs double quotation marks as a MUST. so change the dbl ones e.g inside an xpath to single ones to make Csharp comfy.
             // Ooh she's a bit of a diva this Csharp!
-            driver.FindElement(By.Name("email")).SendKeys("hello");
+            driver.FindElement(By.Name("email")).SendKeys("ttest2@spartaglobal.com");
 
         
         
        //FillPasswordField()
         
-            // Enter 'testing' in password bar
-            driver.FindElement(By.Name("password")).SendKeys("testing");
+            // Enter the valid password in password bar
+            driver.FindElement(By.Name("password")).SendKeys("Tr4iner");
 
         
         
@@ -52,13 +53,16 @@ namespace csharp_ui_take_two
             // Click the submit button
             driver.FindElement(By.XPath("/html/body/div/div[2]/div/div/div/form/div[3]/input")).Click();
 
-        
-        
-       // CloseApplication()
-        
+            //check if succesful
+            driver.FindElement(By.LinkText("Welcome ,  Trainee Test"));
+
+            // string CurrentUrl = driver.Url();
+
+
+            // CloseApplication()
+
             //close the application
-            // driver.Quit();
-        
+            // driver.Quit()
 
 
 
@@ -68,7 +72,8 @@ namespace csharp_ui_take_two
 
 
 
-}
+
+        }
 
     }
 }
