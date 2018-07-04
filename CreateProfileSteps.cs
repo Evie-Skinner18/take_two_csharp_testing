@@ -18,6 +18,9 @@ namespace csharp_ui_take_two
     [Binding]
     public class CreateProfileSteps
     {
+        // create an object of the webdriver that is PUBLIC so now all the methods can see it
+        public IWebDriver driver;
+
         // @valid_login
         [Given(@"I am on the log in page")]
         public void GivenIAmOnTheLogInPage()
@@ -62,7 +65,7 @@ namespace csharp_ui_take_two
             driver.FindElement(By.LinkText("Welcome ,  Trainee Test"));
         }
 
-
+    // @create_profile
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
