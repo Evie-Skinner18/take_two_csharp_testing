@@ -13,7 +13,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace csharp_ui_take_two
 {
-    public class MyClass
+    public class Homepage
     {
         [Test]
         public void SearchTesting()
