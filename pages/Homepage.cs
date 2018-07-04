@@ -26,18 +26,18 @@ namespace csharp_ui_take_two
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMinutes(1);
             // Navigate to URL
             driver.Navigate().GoToUrl("https://37a4a4e2.ngrok.io/login");
-            // Click search our articles. Csharp needs double quotation marks as a MUST. so change the dbl ones e.g inside an xpath to single ones to make Csharp comfy.
+            // Csharp needs double quotation marks as a MUST. so change the dbl ones e.g inside an xpath to single ones to make Csharp comfy.
             // Ooh she's a bit of a diva this Csharp!
-            driver.FindElement(By.XPath("//*[@id='ctl00_ContentPane']/div[1]/div/table[1]/tbody/tr/td[3]/a/img")).Click();
+            driver.FindElement(By.Name("email")).SendKeys("hello");
 
-            // Enter 'testing' in search bar
-            driver.FindElement(By.Id("ct100_MC_Query")).SendKeys("testing");
+            // Enter 'testing' in password bar
+            driver.FindElement(By.Name("password")).SendKeys("testing");
 
-            // Click the search button
-            driver.FindElement(By.Id("ct100_MC_Go")).Click();
+            // Click the submit button
+            driver.FindElement(By.XPath("/html/body/div/div[2]/div/div/div/form/div[3]/input")).Click();
 
             //close the application
-            driver.Quit();
+            // driver.Quit();
 
         
 
