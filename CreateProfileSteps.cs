@@ -68,9 +68,53 @@ namespace csharp_ui_take_two
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
+            // I think this creates an instance of chrome driver
+            ChromeDriverService service = ChromeDriverService.CreateDefaultService(@"C:\Users\TECH-W77\Documents\take_two_csharp_framework-dev\chromedriver_win32", "chromedriver.exe");
+
+            // Launch browser
+            driver = new ChromeDriver(service);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+
+            // Navigate to homepage URL
+            driver.Navigate().GoToUrl("https://37a4a4e2.ngrok.io/login");
+
+            // log in successfully
+            driver.FindElement(By.Name("email")).SendKeys("ttest2@spartaglobal.com");
+            driver.FindElement(By.Name("password")).SendKeys("Tr4iner");
+            driver.FindElement(By.XPath("/html/body/div/div[2]/div/div/div/form/div[3]/input")).Click();
+
+            //check if succesful
+            driver.FindElement(By.XPath("/html/body/div/nav/ul/li[1]/a"));
+        }
+
+        [When(@"I click new profile")]
+        public void WhenIClickNewProfile()
+        {
+            driver.FindElement(By.LinkText("Create a profile")).Click();
+        }
+
+        [When(@"add the correct details")]
+        public void WhenAddTheCorrectDetails()
+        {
+            driver.FindElement(By.Id("profile_summary")).SendKeys("Tbh mixtape lomo craft beer, polaroid kale chips vexillologist cray chambray narwhal activated charcoal literally. Trust fund kinfolk hexagon neutra, blue bottle next level gentrify shaman iceland fashion axe four loko raw denim helvetica. Semiotics cray readymade, swag chillwave pork belly food truck. Shoreditch twee tofu leggings you probably haven't heard of them vexillologist. Readymade fam small batch neutra farm-to-table chambray plaid you probably haven't heard of them hot chicken flannel taxidermy. Man braid raclette plaid heirloom chia.");
+            IWebElement select = driver.FindElement(By.TagName("select"));
+            IList<IWebElement> allOptions = select.FindElements(By.TagName("option"));
+            foreach (IWebElement option in allOptions)
+                {
+                    option.Click();
+                } //end of foreach
+
+            driver.FindElement(By.Id("profile_degree")).SendKeys("BSc Cheesemaking");
+            driver.FindElement(By.Name("commit")).Click();
+         }
+
+        [Then(@"it should show me the profile on the index page")]
+        public void ThenItShouldShowMeTheProfileOnTheIndexPage()
+        {
             ScenarioContext.Current.Pending();
         }
-        
+
+
         [Given(@"there is already a profile created")]
         public void GivenThereIsAlreadyAProfileCreated()
         {
@@ -143,20 +187,7 @@ namespace csharp_ui_take_two
             ScenarioContext.Current.Pending();
         }
         
-       
-        
-        [When(@"I click new profile")]
-        public void WhenIClickNewProfile()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"add the correct details")]
-        public void WhenAddTheCorrectDetails()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
+              
         [When(@"I click create a profile")]
         public void WhenIClickCreateAProfile()
         {
@@ -246,13 +277,7 @@ namespace csharp_ui_take_two
         {
             ScenarioContext.Current.Pending();
         }
-                
-        [Then(@"it should show me the profile on the index page")]
-        public void ThenItShouldShowMeTheProfileOnTheIndexPage()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
+                        
         [Then(@"I should be given a drop down list of streams to choose from")]
         public void ThenIShouldBeGivenADropDownListOfStreamsToChooseFrom()
         {
