@@ -29,14 +29,10 @@ namespace csharp_ui_take_two
             ChromeDriverService service = ChromeDriverService.CreateDefaultService(@"C:\Users\TECH-W77\Documents\take_two_csharp_framework-dev\chromedriver_win32", "chromedriver.exe");
 
             // Launch browser
-            IWebDriver driver = new ChromeDriver(service);
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMinutes(1);
-
-
+            driver = new ChromeDriver(service);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             // Navigate to homepage URL
-
             driver.Navigate().GoToUrl("https://37a4a4e2.ngrok.io/login");
         }
         
@@ -62,10 +58,13 @@ namespace csharp_ui_take_two
         public void ThenIShouldBeRedirectedToTheProfilesIndexPage()
         {
             //check if succesful
-            driver.FindElement(By.LinkText("Welcome ,  Trainee Test"));
+            driver.FindElement(By.XPath("/html/body/div/nav/ul/li[1]/a"));
+
+            //close the application
+            driver.Close();
         }
 
-    // @create_profile
+        // @create_profile
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {

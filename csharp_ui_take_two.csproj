@@ -54,15 +54,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateProfileSteps.cs" />
     <Compile Include="features\create_profile.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>create_profile.feature</DependentUpon>
-    </Compile>
-    <Compile Include="features\SpecFlowFeature1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
     </Compile>
     <Compile Include="pages\Homepage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,10 +67,6 @@
     <None Include="features\create_profile.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>create_profile.feature.cs</LastGenOutput>
-    </None>
-    <None Include="features\SpecFlowFeature1.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
