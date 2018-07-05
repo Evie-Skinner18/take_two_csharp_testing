@@ -105,7 +105,7 @@ namespace csharp_ui_take_two
                 } //end of foreach
 
             driver.FindElement(By.Id("profile_degree")).SendKeys("BSc Cheesemaking");
-            driver.FindElement(By.ClassName("col-xs-4")).Click();
+            driver.FindElement(By.CssSelector("input[value='Save']")).Submit();
          }
 
         [Then(@"it should show me the profile on the index page")]
