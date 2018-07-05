@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 // to access Selenium class we need to open the door to it
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 //need to access chrome driver
 using OpenQA.Selenium.Chrome;
@@ -33,7 +34,7 @@ namespace csharp_ui_take_two
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             // Navigate to homepage URL
-            driver.Navigate().GoToUrl("https://37a4a4e2.ngrok.io/login");
+            driver.Navigate().GoToUrl("https://8ddba250.ngrok.io/login");
         }
         
         [Given(@"I enter my details")]
@@ -124,23 +125,84 @@ namespace csharp_ui_take_two
         }
 
         // @choose_Stream
-        [Given(@"there is already a profile created")]
+        [Given(@"that I am logged in")]
+        public void GivenThatIAmLoggedIn()
+        {
+            // I think this creates an instance of chrome driver
+            ChromeDriverService service = ChromeDriverService.CreateDefaultService(@"C:\Users\TECH-W77\Documents\take_two_csharp_framework-dev\chromedriver_win32", "chromedriver.exe");
+
+            // Launch browser
+            driver = new ChromeDriver(service);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+
+            // Navigate to homepage URL
+            driver.Navigate().GoToUrl("https://8ddba250.ngrok.io/login");
+
+            // log in successfully
+            driver.FindElement(By.Name("email")).SendKeys("ttest2@spartaglobal.com");
+            driver.FindElement(By.Name("password")).SendKeys("Tr4iner");
+            driver.FindElement(By.XPath("/html/body/div/div[2]/div/div/div/form/div[3]/input")).SendKeys(Keys.Enter);
+
+            //check if succesful
+            driver.FindElement(By.XPath("/html/body/div/nav/ul/li[1]/a"));
+        }
+
+        [When(@"I click create a profile")]
+        public void WhenIClickCreateAProfile()
+        {
+            IWebElement saveButton = driver.FindElement(By.LinkText("Create a profile"));
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(saveButton);
+            actions.Click();
+            actions.Perform();
+        }
+
+        [Then(@"I should be given a drop down list of streams to choose from")]
+        public void ThenIShouldBeGivenADropDownListOfStreamsToChooseFrom()
+        {
+            bool pageHasDropdownList = driver.FindElement(By.TagName("select")).Displayed;
+        }
+
+
+       
+       // @view_created_profile
+                [Given(@"there is already a profile created")]
         public void GivenThereIsAlreadyAProfileCreated()
         {
-            ScenarioContext.Current.Pending();
+            //check that the CRUD links are there
+            bool pageHasEditLink = driver.FindElement(By.LinkText("Edit")).Displayed;
+            bool pageHasDownloadLink = driver.FindElement(By.LinkText("Download")).Displayed;
+            bool pageHasDestroyLink = driver.FindElement(By.LinkText("Destroy")).Displayed;
         }
-        
+
+        [When(@"I click on the profile")]
+        public void WhenIClickOnTheProfile()
+        {
+            driver.FindElement(By.XPath("//*[@id='draft']/tr/td[1]/a")).Click();
+        }
+        [Then(@"it should show me the profile")]
+        public void ThenItShouldShowMeTheProfile()
+        {
+            bool pageHasSummaryHeading = driver.FindElement(By.XPath("//*[@id='pdf']/div[3]/div/h2")).Displayed;
+            bool pageHasExperienceHeading = driver.FindElement(By.XPath("//*[@id='pdf']/div[4]/div/h2")).Displayed;
+            bool pageHasProjectsHeading = driver.FindElement(By.XPath("//*[@id='pdf']/div[5]/div/h2")).Displayed;
+            bool pageHasEmploymentHeading = driver.FindElement(By.XPath("//*[@id='pdf']/div[6]/div/h2")).Displayed;
+            bool pageHasEducationHeading = driver.FindElement(By.XPath("//*[@id='pdf']/div[7]/div/h2")).Displayed;
+            bool pageHasCertHeading = driver.FindElement(By.XPath("//*[@id='pdf']/div[8]/div/h2")).Displayed;
+
+            driver.Close();
+        }
+
+        //@edit_profile
+
+
+
         [Given(@"I navigate to the project section")]
         public void GivenINavigateToTheProjectSection()
         {
             ScenarioContext.Current.Pending();
         }
         
-        [Given(@"that I am logged in")]
-        public void GivenThatIAmLoggedIn()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
         [Given(@"I navigate to the Employment page")]
         public void GivenINavigateToTheEmploymentPage()
@@ -197,17 +259,7 @@ namespace csharp_ui_take_two
         }
         
               
-        [When(@"I click create a profile")]
-        public void WhenIClickCreateAProfile()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
-        [When(@"I click on the profile")]
-        public void WhenIClickOnTheProfile()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
         [When(@"I click edit")]
         public void WhenIClickEdit()
@@ -287,17 +339,7 @@ namespace csharp_ui_take_two
             ScenarioContext.Current.Pending();
         }
                         
-        [Then(@"I should be given a drop down list of streams to choose from")]
-        public void ThenIShouldBeGivenADropDownListOfStreamsToChooseFrom()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
-        [Then(@"it should show me the profile")]
-        public void ThenItShouldShowMeTheProfile()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
         [Then(@"it should show the updated details on the id page")]
         public void ThenItShouldShowTheUpdatedDetailsOnTheIdPage()
