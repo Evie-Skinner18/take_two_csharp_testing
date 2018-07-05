@@ -141,7 +141,7 @@ namespace csharp_ui_take_two
             // log in successfully
             driver.FindElement(By.Name("email")).SendKeys("ttest2@spartaglobal.com");
             driver.FindElement(By.Name("password")).SendKeys("Tr4iner");
-            driver.FindElement(By.XPath("/html/body/div/div[2]/div/div/div/form/div[3]/input")).SendKeys(Keys.Enter);
+            driver.FindElement(By.XPath("/html/body/div/div[2]/div/div/div/form/div[3]/input")).Click();
 
             //check if succesful
             driver.FindElement(By.XPath("/html/body/div/nav/ul/li[1]/a"));
@@ -194,6 +194,27 @@ namespace csharp_ui_take_two
         }
 
         //@edit_profile
+        [When(@"I click edit")]
+        public void WhenIClickEdit()
+        {
+            driver.FindElement(By.LinkText("Edit")).Click();
+        }
+        [When(@"change the details on my profile form")]
+        public void WhenChangeTheDetailsOnMyProfileForm()
+        {
+            driver.FindElement(By.Id("profile_summary")).SendKeys("I am a cheese priest!");
+            driver.FindElement(By.LinkText("Save")).Submit();
+        }
+
+        [Then(@"it should show the updated details on the id page")]
+        public void ThenItShouldShowTheUpdatedDetailsOnTheIdPage()
+        {
+            bool profileIsUpdated = driver.FindElement(By.LinkText("I am a cheese priest!")).Displayed;
+        }
+
+
+
+
 
 
 
@@ -261,17 +282,7 @@ namespace csharp_ui_take_two
               
         
         
-        [When(@"I click edit")]
-        public void WhenIClickEdit()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
-        [When(@"change the details on my profile form")]
-        public void WhenChangeTheDetailsOnMyProfileForm()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
         [When(@"I click to delete the profile")]
         public void WhenIClickToDeleteTheProfile()
@@ -341,11 +352,6 @@ namespace csharp_ui_take_two
                         
         
         
-        [Then(@"it should show the updated details on the id page")]
-        public void ThenItShouldShowTheUpdatedDetailsOnTheIdPage()
-        {
-            ScenarioContext.Current.Pending();
-        }
         
         [Then(@"it should remove the profile from that page")]
         public void ThenItShouldRemoveTheProfileFromThatPage()
