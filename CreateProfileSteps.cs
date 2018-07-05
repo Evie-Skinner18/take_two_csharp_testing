@@ -76,7 +76,7 @@ namespace csharp_ui_take_two
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             // Navigate to homepage URL
-            driver.Navigate().GoToUrl("https://37a4a4e2.ngrok.io/login");
+            driver.Navigate().GoToUrl("https://8ddba250.ngrok.io/login");
 
             // log in successfully
             driver.FindElement(By.Name("email")).SendKeys("ttest2@spartaglobal.com");
@@ -105,16 +105,25 @@ namespace csharp_ui_take_two
                 } //end of foreach
 
             driver.FindElement(By.Id("profile_degree")).SendKeys("BSc Cheesemaking");
-            driver.FindElement(By.Name("commit")).Click();
+            driver.FindElement(By.ClassName("col-xs-4")).Click();
          }
 
         [Then(@"it should show me the profile on the index page")]
         public void ThenItShouldShowMeTheProfileOnTheIndexPage()
         {
-            ScenarioContext.Current.Pending();
+            // navigate back to index page
+            driver.FindElement(By.LinkText("Back to Profiles")).Click();
+
+            //check that the CRUD links are there
+            bool pageHasEditLink =  driver.FindElement(By.LinkText("Edit")).Displayed;
+            bool pageHasDownloadLink = driver.FindElement(By.LinkText("Download")).Displayed;
+            bool pageHasDestroyLink = driver.FindElement(By.LinkText("Destroy")).Displayed;
+            //close the application
+            driver.Close();
+
         }
 
-
+        // @choose_Stream
         [Given(@"there is already a profile created")]
         public void GivenThereIsAlreadyAProfileCreated()
         {
