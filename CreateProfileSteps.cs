@@ -34,7 +34,7 @@ namespace csharp_ui_take_two
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             // Navigate to homepage URL
-            driver.Navigate().GoToUrl("https://8ddba250.ngrok.io/login");
+            driver.Navigate().GoToUrl("https://eb5ba188.ngrok.io/");
         }
         
         [Given(@"I enter my details")]
@@ -77,7 +77,7 @@ namespace csharp_ui_take_two
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             // Navigate to homepage URL
-            driver.Navigate().GoToUrl("https://8ddba250.ngrok.io/login");
+            driver.Navigate().GoToUrl("https://eb5ba188.ngrok.io/");
 
             // log in successfully
             driver.FindElement(By.Name("email")).SendKeys("ttest2@spartaglobal.com");
@@ -119,6 +119,11 @@ namespace csharp_ui_take_two
             bool pageHasEditLink =  driver.FindElement(By.LinkText("Edit")).Displayed;
             bool pageHasDownloadLink = driver.FindElement(By.LinkText("Download")).Displayed;
             bool pageHasDestroyLink = driver.FindElement(By.LinkText("Destroy")).Displayed;
+
+            // delete this profile. TEAR DOWN
+            driver.FindElement(By.LinkText("Destroy")).Click();
+            driver.FindElement(By.XPath("//*[@id='confirm - modal - 59052181793100']/div/div/div[3]/button[2]")).Click();
+
             //close the application
             driver.Close();
 
@@ -136,7 +141,7 @@ namespace csharp_ui_take_two
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             // Navigate to homepage URL
-            driver.Navigate().GoToUrl("https://8ddba250.ngrok.io/login");
+            driver.Navigate().GoToUrl("https://eb5ba188.ngrok.io/n");
 
             // log in successfully
             driver.FindElement(By.Name("email")).SendKeys("ttest2@spartaglobal.com");
