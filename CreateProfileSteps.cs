@@ -7,7 +7,9 @@ using NUnit.Framework;
 
 // to access Selenium class we need to open the door to it
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
+using static OpenQA.Selenium.IAlert;
 
 //need to access chrome driver
 using OpenQA.Selenium.Chrome;
@@ -121,8 +123,17 @@ namespace csharp_ui_take_two
             bool pageHasDestroyLink = driver.FindElement(By.LinkText("Destroy")).Displayed;
 
             // delete this profile. TEAR DOWN
+
             driver.FindElement(By.LinkText("Destroy")).Click();
-            driver.FindElement(By.XPath("//*[@id='confirm - modal - 59052181793100']/div/div/div[3]/button[2]")).Click();
+
+            // driver.FindElement(By.XPath("//*[@id='confirm - modal - 59052181793100']/div/div/div[3]/button[2]")).Click();
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+            IAlert alert = wait.Until(AlertIsPresent());
+            //IAlert alert = driver.SwitchTo().Alert();
+            alert.Accept();
+
+
+        
 
             //close the application
             driver.Close();
